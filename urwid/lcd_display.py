@@ -492,3 +492,10 @@ class CF635Screen(CFLCDScreen):
         self.queue_command(self.CMD_GPO, chr(12 - 2 * led - rg) + 
             chr(value))
 
+
+    def run_wrapper(self,fn):
+       try:
+            super(LCDScreen, self).start()
+            return fn()
+       finally:
+            super(LCDScreen, self).stop()
